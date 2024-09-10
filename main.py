@@ -10,7 +10,6 @@ Logs = os.path.sep.join([CWD,'logs'])
 LogFile = os.path.sep.join([Logs,'App.log'])
 
 logging.basicConfig(format = "%(asctime)s %(levelname)s :: %(message)s", level=logging.DEBUG)
-##logging.basicConfig(format = "%{asctime} %{levelname} :: %{message}", level=logging.DEBUG)
 logger = logging.getLogger('Analysis')
 handler = RotatingFileHandler(LogFile, maxBytes=1000000, backupCount=100, encoding='utf-8',delay=0)
 handler.setLevel(logging.INFO)
