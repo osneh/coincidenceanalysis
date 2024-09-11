@@ -102,17 +102,22 @@ def compare_and_add_elements(l1, l2):
 def main():
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file" , action='store_true',help="provide the binary input file produced by PICMIC0/SAMPIC")
-    parser.add_argument("PARAMS", nargs='+')
+    parser.add_argument("-f", "--file" ,help="provide the binary input file produced by PICMIC0/SAMPIC")
+    ##parser.add_argument("PARAMS", nargs='+')
     parser.add_argument("-o", "--outDir", help="provide the output folder to save the processed ASCII data")
-    args, unknown = parser.parse_known_args()
-    if not sys.stdin.isatty():
-        args.PARAMS.extend(sys.stdin.read().splitlines())
-     
-     
-    print(args.file)
-    # loading the tailed file
-    for f in args.PARAMS :
+    ##args, unknown = parser.parse_known_args()
+    args = parser.parse_args()
+    ##if not sys.stdin.isatty():
+    ##    args.PARAMS.extend(sys.stdin.read().splitlines())
+    
+    myFiles = args.file
+    
+    if type(myFiles)!= list :
+        myFiles = [myFiles]
+        
+    for f in myFiles :
+        ##print('-- HERE --')
+        ##print(f)
         # variable defintions
         dump =1
         mat=[]
@@ -126,9 +131,12 @@ def main():
         testList = []
         
         inFileName = f.split('/')[0]
-        outFileName = inFileName.split('.')[0]+'.csv'
-    
+        ##outFileName = inFileName.split('.')[0]+'.csv'
+        outFolder = args.outDir
+        #print(args.outDir)
+        
         # inFile
+        print(f)
         file = open(f,"rb")
     
         ## Reading information from the file comments
@@ -274,10 +282,12 @@ def main():
             df2Csv[key] = value
             
         ##print(df2Csv)
-        df2Csv.to_csv('Picmic0.csv', index=False)
+        df2Csv.to_csv(outFolder+'Picmic0.csv', index=False)
 
-
+        ##print(args.outDir)
         file.close()
+        
+        
         
         
         
