@@ -9,6 +9,9 @@ import random
 import time
 import sys
 
+inFile = sys.argv[1]
+print(inFile)
+
 thresholds = [20]
 
 def generate_random_numbers(n):
@@ -34,7 +37,8 @@ for i in mymarker :
         color_marker.append([j,i])
 
 
-dataPicmic = pd.read_csv('/home/habreu/WORK/dataImad_23Jul2024/Picmic0_noSingleStripEvents.csv')
+##dataPicmic = pd.read_csv('/home/habreu/WORK/dataImad_23Jul2024/Picmic0_noSingleStripEvents.csv')
+dataPicmic = pd.read_csv(inFile)
 
 
 ifile= 'inter.csv'
@@ -53,11 +57,11 @@ idxs = []
 XC = -999999
 YC = -999999
 
-for i in range(dataPicmic.index.stop):
+##for i in range(dataPicmic.index.stop):
 ##for i in [1641,1642,1643,1644]:
 #
 # for i in [1641,1642,1643,1644]:
-##for i in [1,2,3,4]:
+for i in [1,2,3,4]:
     
     tmpPt0 = []
     tmpPt1 = []
@@ -68,19 +72,20 @@ for i in range(dataPicmic.index.stop):
     if (pixels>1):
         print('----------------------   Event ',i,'  ---------------------------')
         print(str(dataPicmic.nbPixels[i])+" "+dataPicmic.listPixelsString[i])
-        cdm =str('./xypicmic.exe ')+str(thresholds[0])+str(' ')+str(dataPicmic.nbPixels[i])+str(' ')+str(dataPicmic.listPixelsString[i])
+        cdm =str('./clustering/xypicmic.exe ')+str(thresholds[0])+str(' ')+str(dataPicmic.nbPixels[i])+str(' ')+str(dataPicmic.listPixelsString[i])
         print(cdm)
         os.system(cdm)
         ## ## ---------------------------------------------------------------------------------------------------------------- ## ##
         ## ## ---------------------------------------------------------------------------------------------------------------- ## ##
         ##''''
+        ##data = pd.read_csv("clustering/xlines.csv",delimiter=";")
         data = pd.read_csv("xlines.csv",delimiter=";")
         wList.append(list(data.track))
         
 
         ##if (mypathI):
         if os.path.getsize(ifile) > 0:
-            print('HERE 1')
+            ##print('HERE 1')
             df= pd.read_csv(ifile, delimiter=";")
 
         if (mypathC):
@@ -112,9 +117,9 @@ for i in range(dataPicmic.index.stop):
         
     #if (mypathI):
     if os.path.getsize(ifile) > 0:
-        print('HERE 11')
+        ##print('HERE 11')
         dim = df.index.stop
-        print('dim:',dim)
+        ##print('dim:',dim)
         fillCounter = -1
         count = 0 
     
@@ -158,7 +163,7 @@ for i in range(dataPicmic.index.stop):
     #plt.title('PICMIC$0$ Intersections, Centroid -- #inter:'+str(i))
     plt.legend()
     plt.savefig('lines_evt'+str(i)+'.png')
-    #plt.show()
+    ##plt.show()
     plt.close()
 
 
@@ -187,6 +192,6 @@ print(40*'--')
 ##print(xCent)
 
 dfFromDict = pd.DataFrame.from_dict(mydict)
-dfFromDict.to_csv('processedIntersectionsPicmic.csv',index=False)
+dfFromDict.to_csv('data/processedIntersectionsPicmic.csv',index=False)
 
 exit()
