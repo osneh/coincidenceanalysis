@@ -37,3 +37,6 @@ rm -rf *png
 
 # process Sampic data
 python src/processSampicData.py -f $FILESAMPIC -o $OUTDIR
+
+# merging data sampic picmic_data
+python src/timeCoindence_mergingSampicPicmic.py

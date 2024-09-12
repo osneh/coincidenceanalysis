@@ -57,11 +57,11 @@ idxs = []
 XC = -999999
 YC = -999999
 
-##for i in range(dataPicmic.index.stop):
+for i in range(dataPicmic.index.stop):
 ##for i in [1641,1642,1643,1644]:
 #
 # for i in [1641,1642,1643,1644]:
-for i in [1,2,3,4]:
+##for i in [1,2,3,4]:
     
     tmpPt0 = []
     tmpPt1 = []
