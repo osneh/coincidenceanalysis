@@ -18,6 +18,7 @@ source kcompile.sh
 cd ../
 ```
 provide yours picmic and Sampic Input-files (in ascii format) and your Output directory 
+
 source run.bat *inFilePicmic* *inFileSampic* *OutDir*
 
 for instance,
